@@ -6,16 +6,14 @@ public class HotSpot implements Comparable{
     String content;//热搜内容
     int popularity=0;//热度
     int price = 0;//竞价价格
-    boolean isSuper=false;
+    int buyRank=0;//竞价购买的排名
+    boolean isSuper=false;//是否是超级热搜
 
     //热搜排序比较规则：先比价格，再比热度
     @Override
     public int compareTo(Object o) {
         HotSpot spot=(HotSpot)o;
-        int result=price<spot.getPrice()? 1:(price==spot.getPrice()?0:-1);
-        if(result==0){
-            result=popularity<spot.getPopularity()? 1:(popularity==spot.getPopularity()?0:-1);
-        }
+        int result=popularity<spot.getPopularity()? 1:(popularity==spot.getPopularity()?0:-1);
         return result;
     }
 
@@ -64,7 +62,15 @@ public class HotSpot implements Comparable{
         isSuper = aSuper;
     }
 
-    public HotSpot(String content,boolean isSuper) {
+    public int getBuyRank() {
+        return buyRank;
+    }
+
+    public void setBuyRank(int buyRank) {
+        this.buyRank = buyRank;
+    }
+
+    public HotSpot(String content, boolean isSuper) {
         this.content = content;
         this.isSuper = isSuper;
     }
